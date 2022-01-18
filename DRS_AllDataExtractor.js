@@ -99,7 +99,7 @@
  * @off しない
  * @default true
  * 
- * @help AllDataExtractor.js
+ * @help DRS_AllDataExtractor.js
  * このプラグインをONにした状態でツクール上の「ゲーム」から「テストプレイ」を実行してください。
  * うまく動作すればプロジェクトと同じ場所のdata_outputフォルダ内に抽出したデータを保存します。
  * 
