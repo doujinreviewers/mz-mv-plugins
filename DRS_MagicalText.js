@@ -1,6 +1,6 @@
 /*:ja
  * @target MV
- * @plugindesc メッセージスキップテスト
+ * @plugindesc メッセージ機能を強化するプラグイン
  * @author 同人Reviewers
  * 
  * @help DRS_MagicalText.js
