@@ -4,7 +4,15 @@
  * @author 同人Reviewers
  * 
  * @help DRS_MagicalText.js
- * テキストメッセージについて、スキップ、自動送り、バックログの3つの機能を追加するプラグインです。
+ * テキストメッセージにスキップと自動送りを追加するプラグインです。
+ * 
+ * ・スキップ
+ * Ctrlキーを押している間メッセージをスキップします。
+ * 
+ * ・自動送り
+ * Aキーを押すと5秒ごとにメッセージを自動で送るようになります。
+ * この秒数を変更したい場合はmsecの値を変更してください。
+ * 自動送りを解除するにはもう一度Aキーを押します。
  * 
  */
 
@@ -15,6 +23,7 @@
   let autoFlag = false;
   let timerId = null;
   let send = false;
+  let msec = 5000; // 5000 = 5秒ごとに自動送り
 
   Input.keyMapper[65] = 'A';
 
@@ -36,7 +45,7 @@
     if (autoFlag) {
       timerId = setTimeout(function() {
         send = true;
-      }, 2000);
+      }, msec);
     }
   };
 
