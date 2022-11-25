@@ -12,6 +12,42 @@
 {
   let params = PluginManager.parameters("MagicalText");
 
+  let autoFlag = false;
+  let timerId = null;
+  let send = false;
+
+  Input.keyMapper[65] = 'A';
+
+  let Scene_Map_update = Scene_Map.prototype.update;
+  Scene_Map.prototype.update = function() {
+    Scene_Map_update.call(this);
+    if(Input.isTriggered('A')){
+      if(autoFlag){
+        autoFlag = false;
+      }else{
+        autoFlag = true;
+      }
+    }
+  }
+
+  let Window_Message_startPause = Window_Message.prototype.startPause;
+  Window_Message.prototype.startPause = function() {
+    Window_Message_startPause.call(this);
+    if (autoFlag) {
+      timerId = setTimeout(function() {
+        send = true;
+      }, 2000);
+    }
+  };
+
+  let Window_Message_startMessage = Window_Message.prototype.startMessage;
+  Window_Message.prototype.startMessage = function() {
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    Window_Message_startMessage.call(this);
+  };
+
   let _Window_Message_updateWait = Window_Message.prototype.updateWait;
   Window_Message.prototype.updateWait = function() {
     if (Input.isPressed("control")) {
@@ -33,6 +69,10 @@
   let _Window_Message_isTriggered = Window_Message.prototype.isTriggered;
   Window_Message.prototype.isTriggered = function() {
     if(Input.isPressed("control")){
+      return true;
+    }
+    if(send){
+      send = false;
       return true;
     }
     return _Window_Message_isTriggered.call(this);
