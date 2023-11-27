@@ -109,7 +109,7 @@
 
 (() => {
   'use strict';
-  let params = PluginManager.parameters("AllDataExtractor");
+  let params = PluginManager.parameters("DRS_AllDataExtractor");
   let fs   = require('fs');
   let path = require('path');
   let data_dir = path.join(process.cwd(), 'data');
